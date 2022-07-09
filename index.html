@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asynchronous JS</title>
+</head>
+<body>
+    <script>
+//        const posts = [
+//     {title: 'Post one', body: 'This is post one',createdAt: new Date().getTime()},
+//     {title: 'Post two', body: 'This is post two', createdAt: new Date().getTime()}
+// ];
+
+
+// function getPosts(){
+//      setTimeout(() => {
+//         let output = '';
+//         posts.forEach((post, index)=>{
+//             output += `<li>${post.title} - last updated ${(new Date().getTime() - post.createdAt)/1000} seconds ago`
+//         });
+//         document.body.innerHTML = output;
+
+//     }, 1000);
+// }
+// function createPosts(post, callback){
+//     setTimeout(()=>{
+//         posts.push({...post, createdAt: new Date().getTime()});
+//         callback();
+
+//     },2000);
+// }
+// function create4thPosts(post, callback){
+//     setTimeout(()=>{
+//         posts.push({...post, createdAt: new Date().getTime()});
+//         callback();
+
+//     },6000);
+// }
+
+
+// createPosts({title: 'Post three', body: 'This is post three'},getPosts);
+// create4thPosts({title: 'Post four', body: 'This is post four'},getPosts);
+
+       const posts = [
+    {title: 'Post one', body: 'This is post one',createdAt: new Date().getTime()},
+    {title: 'Post two', body: 'This is post two', createdAt: new Date().getTime()}
+];
+
+
+function getPosts(){
+     setTimeout(() => {
+        let output = '';
+        posts.forEach((post, index)=>{
+            output += `<li>${post.title}</li>`
+         });
+        document.body.innerHTML = output;
+
+    }, 1000);
+}
+
+    function createPosts(post){
+        return new Promise((resolve, reject) => {
+            setTimeout(()=>{
+            posts.push(post);
+
+            const error = false;
+            if(!error){
+                resolve();
+            }else{
+                reject('Error: Somthing went wrong !!');
+            }
+        },2000);
+        })
+       
+    }
+// //   function deletePosts(post,cre){
+// //     return new Promise((resolve, reject) => {
+// //         setTimeout(() =>{
+       
+            
+// //               if(posts.value === null){
+// //                 reject('Array is empty now');
+                 
+// //             }else{
+// //                 resolve( posts.pop());
+// //             }
+// //         },1000);
+// //     })
+// //   }
+// //     createPosts({title: 'Post three', body: 'This is post three'})
+// //    .then(() =>{
+//     getPosts()
+//     deletePosts().then(() =>{
+//         getPosts()
+//         deletePosts().then(() =>{ 
+//             getPosts()
+//             deletePosts().then(() =>{
+//                 getPosts() 
+//                 deletePosts().then(() =>{
+//                     getPosts()
+//             }).catch(err => console.log(err))
+//             })
+//         })  
+// })
+//    }).catch(err => console.log(err))
+ // Promise all
+// const promise1 = Promise.resolve('Hello World');   
+// const promise2 = 10;
+// const promise3 = new Promise((resolve, reject) =>
+//         setTimeout(resolve, 2000, 'Goodbye')
+// );
+// const promise4 = fetch
+// ('https://jsonplaceholder.typicode.com/users').then(res => res.json());
+// Promise.all([promise1,promise2,promise3]).then(values => console.log(values));
+   
+
+const user = {
+    username: 'yash',
+    lastactivitytime: '13th of Jan'
+}
+
+function updatelastactivitytime(post){
+    return new Promise((resolve, reject) => {
+        setTimeout(() =>{
+            user.lastactivitytime = new Date().getTime;
+            if(posts !== 0){
+            resolve(user.lastactivitytime) ;               
+            }else{
+                reject('Array is empty now'); 
+            }
+        },1000);
+    })
+  }
+
+  
+  createPosts({title: 'Post three', body: 'This is post three'},getPosts);
+ function userupdatepost(posts){
+    Promise.all([createPosts, updatelastactivitytime])
+    .then(([createPostsresolves, updatelastactivitytimeresolves]) =>{
+        console.log(updatelastactivitytimeresolves)
+    })
+    .catch(err => console.log(err))
+  };
+
+    </script>
+</body>
+</html>
